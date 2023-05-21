@@ -66,9 +66,9 @@ class dept_dashboard_model extends CI_Model
 
     public function get_post_by_slug($slug = null)
     {
-        $this->db->select('p.*, c.department_name, u.fullname, u.avatar');
-        $this->db->join('department c', 'c.department_id=p.department_id');
-        $this->db->join('users u', 'u.user_id=p.user_id', 'left');
+        // $this->db->select('p.*, c.department_name, u.fullname, u.avatar');
+        // $this->db->join('department c', 'c.department_id=p.department_id');
+        // $this->db->join('users u', 'u.user_id=p.user_id', 'left');
         $query = $this->db->get_where('dashboard p', ['p.dashboard_slug' => $slug]);
         return $query->row();
     }

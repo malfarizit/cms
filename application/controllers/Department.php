@@ -17,6 +17,10 @@ class Department extends CI_Controller
 
         $data['title']  = "Post Detail";
         $data['department']   = $this->dept_list->get_post_by_slug($slug);
+        $data['dashboard'] = $this->dept_list->get_dept_by_slug($slug);
+        // $data['dashboard']   = $this->dept_list->get_dashboard_by_slug($slug);
+        // $data['dash']   = $this->dept_list->get_post_by_slug($slug);
+        // $data['dashboard']   = $this->dept_list->get_dept_by_slug($slug);
         // $data['selected_department'] = $data['post']->department_id;
         $data['recent_posts'] = $this->post->recent_post($slug);
 
@@ -59,6 +63,18 @@ class Department extends CI_Controller
         // $data['recent_posts'] = $this->post->recent_post($slug);
 
         public_template2('department/list', $data);
+    }
+
+    public function department_dashboard($slug = "")
+    {
+
+        $data['title'] = "Dashboard";
+        $data['department']   = $this->dept_dashboard->get_post_by_slug($slug);
+        $data['dash'] = $this->dept_dashboard->get_table_post();
+        // $data['selected_department'] = $data['dash']->department_id;
+        // $data['recent_posts'] = $this->post->recent_post($slug);
+
+        public_template2('department/dashboard', $data);
     }
 
     private function validation()

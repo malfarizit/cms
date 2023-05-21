@@ -64,13 +64,42 @@ class dept_list_model extends CI_Model
         return $query;
     }
 
+    // public function get_post_by_slug($slug = null)
+    // {
+    //     // $this->db->select('p.*, c.department_name, u.fullname, u.avatar');
+    //     // $this->db->join('department c', 'c.department_id=p.department_id');
+    //     // $this->db->join('users u', 'u.user_id=p.user_id', 'left');
+    //     $query = $this->db->get_where('department', ['department_slug' => $slug]);
+    //     return $query->row();
+    // }
+
     public function get_post_by_slug($slug = null)
     {
-        // $this->db->select('p.*, c.department_name, u.fullname, u.avatar');
-        // $this->db->join('department c', 'c.department_id=p.department_id');
+        $this->db->select('d.*, c.*');
+        $this->db->join('dashboard c', 'c.department_id=d.department_id', 'left');
         // $this->db->join('users u', 'u.user_id=p.user_id', 'left');
-        $query = $this->db->get_where('department', ['department_slug' => $slug]);
+        $query = $this->db->get_where('department d', ['d.department_slug' => $slug]);
         return $query->row();
+    }
+
+    // public function get_dashboard_by_slug($slug = null)
+    // {
+    //     $this->db->select('d.*, c.*');
+    //     $this->db->join('department c', 'c.department_id=d.department_id', 'left');
+    //     // $this->db->join('users u', 'u.user_id=p.user_id', 'left');
+    //     $query = $this->db->get_where('dashboard d', ['c.department_slug' => $slug]);
+    //     return $query->result_array();;
+    // }
+
+    public function get_dept_by_slug($slug = null)
+    {
+        $this->db->select('d.*, c.*');
+        $this->db->join('department c', 'c.department_id=d.department_id', 'left');
+        // $this->db->join('users u', 'u.user_id=p.user_id', 'left');
+        // $query = $this->db->get_where('dashboard d', ['c.department_id' => $slug]);
+        // $query = $this->db->get_where('department d', array('d.department_slug' => $slug), 1);
+        // return $query;
+        return $this->db->get_where('dashboard d', array('c.department_slug' => $slug))->result();
     }
 
     public function recent_post($slug)

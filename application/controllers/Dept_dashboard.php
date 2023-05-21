@@ -85,7 +85,7 @@ class Dept_dashboard extends CI_Controller
         $input['dashboard_slug'] = $this->dept_model->create_slug($input['dashboard_title']);
 
         $this->main->insert('dashboard', $input);
-        redirect('dept_dashboard/data');
+        redirect('dept_dashboard/');
     }
 
     private function validation()
